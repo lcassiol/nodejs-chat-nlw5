@@ -17,6 +17,32 @@ class SettingsController {
       return response.status(400).json({ error: true, message: err.message});
     }
   }
+
+  async findByUsername(request: Request, response: Response){
+    const { username } = request.params;
+
+    const settingsService = new SettingsService();
+    const settings = await settingsService.findByUsername(username);
+
+    return response.json(settings);
+  }
+
+  async update(request: Request, response: Response){
+    const { username } = request.params;
+    const { chat } = request.body;
+
+    const settingsService = new SettingsService();
+
+    const settings = await settingsService.update(username, chat);
+    return response.status(204).send();
+  }
+
+  async list(request: Request, response: Response){
+    const settingsService = new SettingsService();
+
+    const settings = await settingsService.index();
+    return response.json(settings);
+  }
 }
 
 export { SettingsController }
