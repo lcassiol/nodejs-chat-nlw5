@@ -15,10 +15,10 @@ class MessagesService {
     this.messagesRepository = getCustomRepository(MessagesRepository)
   }
 
-  async create({ admin_id, text, user_id } : IMessageCreate){
+  async create({ text, admin_id, user_id } : IMessageCreate){
     const message = this.messagesRepository.create({
-      admin_id,
       text,
+      admin_id,
       user_id
     });
 
